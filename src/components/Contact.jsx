@@ -204,7 +204,7 @@ const Contact = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handlePhoneChange}
-                placeholder={BUSINESS_PHONE_DISPLAY}
+                placeholder="555-123-4567"
                 maxLength={12}
                 aria-describedby="phone-hint"
               />
