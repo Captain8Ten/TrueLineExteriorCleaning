@@ -75,6 +75,14 @@ The site sends quote requests through a **Cloudflare Pages Function** at `/api/c
 
 **Docs:** [Send emails from Workers](https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/)
 
+**If the form succeeds in the UI but you get no mail (or an error):**
+
+1. **`NOTIFY` binding** — **Workers & Pages** → **trueline-exterior-cleaning** (your project) → **Settings** → **Functions** → **Bindings**. You must have **Send Email** with variable name **`NOTIFY`**. Without it, the API returns a 500 explaining this.
+2. **Environment variables (Production + Preview)** — **Settings** → **Environment variables**. Set **`CONTACT_FROM`** = `contact@truelineexteriorcleaning.com` and **`CONTACT_TO`** = `tlink1776@gmail.com` for both Production and Preview (or rely on `wrangler.toml` `[vars]` after a fresh deploy). Dashboard values override the file if both exist.
+3. **`CONTACT_TO` must be a verified destination** — **Email** → **Email Routing** → **Destination addresses**: `tlink1776@gmail.com` should appear as verified (same address the Worker sends *to*).
+4. **`ALLOWED_ORIGIN`** — Leave empty while testing, or set it **exactly** to your live origin (e.g. `https://truelineexteriorcleaning.com` or `https://www....` — must match how visitors open the site or POSTs get **403**).
+5. **Logs** — **Workers & Pages** → project → **Functions** → **Logs** (or **Real-time logs**) and submit the form again; errors from `send_email` appear there.
+
 **Local testing**
 
 1. Terminal A: `npm run dev` (Vite, port 5173).

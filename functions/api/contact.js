@@ -129,7 +129,13 @@ export async function onRequestPost(context) {
     await env.NOTIFY.send(emailMessage)
   } catch (e) {
     console.error('send_email failed', e)
-    return Response.json({ error: 'Could not send message. Try again or call us.' }, { status: 502 })
+    return Response.json(
+      {
+        error:
+          'Could not send. In Cloudflare Pages: verify NOTIFY binding, CONTACT_FROM / CONTACT_TO env vars, and Email Routing destinations. Open Workers & Pages → your project → Functions → Logs for details.',
+      },
+      { status: 502 }
+    )
   }
 
   return Response.json({ ok: true })
