@@ -223,18 +223,18 @@ const Contact = () => {
               >
                 <option value="">Select a service</option>
                 <optgroup label="Individual services">
-                  <option value="driveways">Driveways</option>
-                  <option value="decks-patios">Decks & Patios</option>
-                  <option value="siding">Siding</option>
-                  <option value="walkways">Walkways & Sidewalks</option>
-                  <option value="other">Other</option>
+                  <option value="Driveways">Driveways</option>
+                  <option value="Decks & Patios">Decks & Patios</option>
+                  <option value="Siding">Siding</option>
+                  <option value="Walkways & Sidewalks">Walkways & Sidewalks</option>
+                  <option value="Other">Other</option>
                 </optgroup>
                 <optgroup label="Bundles (save on your total project)">
-                  <option value="bundle-driveway-siding">Driveway + Siding</option>
-                  <option value="bundle-driveway-walkways">Driveway + Walkways &amp; Sidewalks</option>
-                  <option value="bundle-deck-siding">Decks/Patios + Siding</option>
-                  <option value="bundle-driveway-deck">Driveway + Decks/Patios</option>
-                  <option value="bundle-custom">Custom bundle (describe below)</option>
+                  <option value="Driveway + Siding">Driveway + Siding</option>
+                  <option value="Driveway + Walkways &amp; Sidewalks">Driveway + Walkways &amp; Sidewalks</option>
+                  <option value="Decks/Patios + Siding">Decks/Patios + Siding</option>
+                  <option value="Driveway + Decks/Patios">Driveway + Decks/Patios</option>
+                  <option value="Custom bundle">Custom bundle (describe below)</option>
                 </optgroup>
               </select>
             </div>
