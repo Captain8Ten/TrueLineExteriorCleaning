@@ -5,10 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // Run `npm run pages:dev` in another terminal (Wrangler serves dist + functions on 8788).
+      // Run `npm run email:dev` in another terminal (email-worker, default port 8787).
       '/api/contact': {
-        target: 'http://127.0.0.1:8788',
+        target: 'http://127.0.0.1:8787',
         changeOrigin: true,
+        rewrite: () => '/',
       },
     },
   },

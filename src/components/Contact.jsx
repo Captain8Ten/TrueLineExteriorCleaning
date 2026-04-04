@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Contact.css'
 
-const CONTACT_API = import.meta.env.VITE_CONTACT_API_URL || '/api/contact'
+// Same-origin /api/contact after you attach the email Worker to that path (recommended).
+// Or set VITE_CONTACT_API_URL to your *.workers.dev URL from `npm run deploy:email`.
+const CONTACT_API = import.meta.env.VITE_CONTACT_API_URL?.trim() || '/api/contact'
 
 const Contact = () => {
   const [formData, setFormData] = useState({

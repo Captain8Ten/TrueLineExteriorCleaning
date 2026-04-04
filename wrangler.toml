@@ -1,17 +1,6 @@
-# Cloudflare Pages — keep this file minimal. Pages CI does NOT allow [[send_email]] here.
-# Add the Send Email binding in the dashboard (steps in README).
-#
-# Optional: set the same vars in Pages → Settings → Environment variables (production / preview).
+# Cloudflare Pages (static site + React). Email is handled by ../email-worker (separate Worker).
+# Pages CI does not support [[send_email]] here.
 
-# Must be lowercase, alphanumeric, dashes only (Pages / Wrangler validation).
 name = "trueline-exterior-cleaning"
 compatibility_date = "2025-03-01"
 pages_build_output_dir = "dist"
-
-[vars]
-# "From" must be an address on your Cloudflare zone (Email Routing / your domain).
-CONTACT_FROM = "contact@truelineexteriorcleaning.com"
-# Must be a verified Email Routing destination (your Gmail).
-CONTACT_TO = "tlink1776@gmail.com"
-# Leave empty unless you set a strict origin below (must match site URL exactly, e.g. https://www...).
-ALLOWED_ORIGIN = ""

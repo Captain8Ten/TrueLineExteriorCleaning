@@ -56,46 +56,47 @@ To preview the production build:
 npm run preview
 ```
 
-### Contact form email (Cloudflare Pages + Email Routing)
+### Contact form email (separate Worker — required)
 
-The site sends quote requests through a **Cloudflare Pages Function** at `/api/contact` using Cloudflare’s **Email Routing** “send email from Workers” feature (no third-party email API).
+Cloudflare **Pages** builds reject `[[send_email]]` in `wrangler.toml`, and the **Send Email** binding often does **not** appear on Pages Functions (`env.NOTIFY` stays `undefined`).  
 
-**Important:** Cloudflare Pages **does not allow** `[[send_email]]` inside `wrangler.toml` during the build (you will see a validation error). The **Send Email** binding must be added in the **dashboard** after the project exists.
+Quote requests are handled by a **standalone Worker** in **`email-worker/`**, where **`send_email` works** in `wrangler.toml`.
 
-**One-time setup**
+**1. Email Routing (zone)**  
+- **Email Routing** on `truelineexteriorcleaning.com` with **`tlink1776@gmail.com`** verified as a **destination**.  
+- **From** address for sends: **`contact@truelineexteriorcleaning.com`** (edit `email-worker/wrangler.toml` `[vars]` if you change addresses).
 
-1. Put your domain on Cloudflare and turn on **Email Routing**. Add and verify the inbox where you want leads (must match `CONTACT_TO`, e.g. your Gmail as a verified destination).
-2. Use a **From** address on that same domain (e.g. `quotes@yourdomain.com`). Set **`CONTACT_FROM`** in `wrangler.toml` `[vars]` and/or **Pages → Settings → Environment variables** (Production and Preview).
-3. Set **`CONTACT_TO`** the same way (inbox that should receive the form emails). Optionally set **`ALLOWED_ORIGIN`** to your live site URL (e.g. `https://www.yourdomain.com`) so only your site can POST to the API.
-4. **Add the email binding (required):** **Workers & Pages** → your **Pages** project → **Settings** → **Functions** → **Bindings** → **Add** → **Send Email** (or **Email Routing**).  
-   - **Variable name:** `NOTIFY` (must match the code; case-sensitive).  
-   - Prefer an unrestricted binding, or set the destination to match `CONTACT_TO` / your verified address.  
-5. Connect the Git repo to **Cloudflare Pages** (or deploy with Wrangler). Build command: `npm run build`, output directory: **`dist`**. The `functions/` folder is deployed as Pages Functions automatically.  
-   The `name` field in `wrangler.toml` must be **lowercase letters, numbers, and dashes only** (e.g. `trueline-exterior-cleaning`). It should match your **Pages project** slug; if the dashboard name uses spaces or capitals, Cloudflare usually uses a slug like this for config.
+**2. Deploy the mail Worker**
+
+```bash
+npm run deploy:email
+```
+
+Note the **`*.workers.dev`** URL Wrangler prints (e.g. `https://trueline-contact-email.<account>.workers.dev`).
+
+**3. Connect the website to the Worker — pick one**
+
+- **Option A — Custom route (recommended, no rebuild):**  
+  **Workers & Pages** → **trueline-contact-email** → **Settings** → **Triggers** → **Routes** → **Add route**  
+  - Route: `www.truelineexteriorcleaning.com/api/contact` (or `*truelineexteriorcleaning.com/api/contact*` per Cloudflare’s pattern help).  
+  The React app already POSTs to **`/api/contact`** on the same host, so no env var is needed.
+
+- **Option B — workers.dev URL:**  
+  In **Cloudflare Pages** → your site → **Settings** → **Environment variables** → **Build** (or **Production** if you inject at build time), set  
+  `VITE_CONTACT_API_URL` = your Worker’s `https://....workers.dev` URL  
+  Redeploy the **Pages** project so Vite bakes it in.
+
+**4. CORS** — `email-worker/wrangler.toml` lists **`ALLOWED_ORIGIN`** for `www` and apex. Adjust if your live URL differs.
+
+**5. Local dev** — Terminal A: `npm run dev`. Terminal B: `npm run email:dev` (Worker on port **8787**). Vite proxies `/api/contact` → the Worker.
 
 **Docs:** [Send emails from Workers](https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/)
-
-**If the form succeeds in the UI but you get no mail (or an error):**
-
-1. **`NOTIFY` binding** — **Workers & Pages** → **trueline-exterior-cleaning** (your project) → **Settings** → **Functions** → **Bindings**. You must have **Send Email** with variable name **`NOTIFY`**. Without it, the API returns a 500 explaining this.
-2. **Environment variables (Production + Preview)** — **Settings** → **Environment variables**. Set **`CONTACT_FROM`** = `contact@truelineexteriorcleaning.com` and **`CONTACT_TO`** = `tlink1776@gmail.com` for both Production and Preview (or rely on `wrangler.toml` `[vars]` after a fresh deploy). Dashboard values override the file if both exist.
-3. **`CONTACT_TO` must be a verified destination** — **Email** → **Email Routing** → **Destination addresses**: `tlink1776@gmail.com` should appear as verified (same address the Worker sends *to*).
-4. **`ALLOWED_ORIGIN`** — Leave empty while testing, or set it **exactly** to your live origin (e.g. `https://truelineexteriorcleaning.com` or `https://www....` — must match how visitors open the site or POSTs get **403**).
-5. **Logs** — **Workers & Pages** → project → **Functions** → **Logs** (or **Real-time logs**) and submit the form again; errors from `send_email` appear there.
-
-**Local testing**
-
-1. Terminal A: `npm run dev` (Vite, port 5173).
-2. Terminal B: `npm run pages:dev` (builds, then serves `dist` + Functions on **8788**). Vite proxies `/api/contact` to 8788.
-
-Miniflare cannot run Cloudflare’s `cloudflare:email` module, so **submits from local dev will get a 503** with a short explanation until you deploy. **Use a Cloudflare Pages preview/production URL to test real delivery.**
-
-**Override API URL** (optional): set `VITE_CONTACT_API_URL` in a `.env` file if the form should post somewhere other than `/api/contact`.
 
 ## Project Structure
 
 ```
 TrueLine/
+├── email-worker/          # Cloudflare Worker: contact form → Email Routing (NOTIFY)
 ├── public/
 │   └── TrueLineExteriorCleaningLogo.png
 ├── src/

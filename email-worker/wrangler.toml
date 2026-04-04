@@ -1,0 +1,20 @@
+# Standalone Worker — send_email IS supported here (unlike Pages-only wrangler).
+# Deploy: cd email-worker && npx wrangler deploy
+#
+# After deploy, either:
+# (A) Set Pages build var VITE_CONTACT_API_URL to your workers.dev URL (shown after deploy), or
+# (B) Add an HTTP route on your zone: www.truelineexteriorcleaning.com/api/contact*
+
+name = "trueline-contact-email"
+main = "src/index.js"
+compatibility_date = "2025-03-01"
+
+[[send_email]]
+name = "NOTIFY"
+
+[vars]
+CONTACT_FROM = "contact@truelineexteriorcleaning.com"
+CONTACT_TO = "tlink1776@gmail.com"
+# Comma-separated allowed Origins for CORS (required if browser calls workers.dev URL).
+# Example: https://www.truelineexteriorcleaning.com,https://truelineexteriorcleaning.com
+ALLOWED_ORIGIN = "https://www.truelineexteriorcleaning.com,https://truelineexteriorcleaning.com"

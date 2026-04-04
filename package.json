@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "pages:dev": "npm run build && wrangler pages dev dist"
+    "pages:dev": "npm run build && wrangler pages dev dist",
+    "email:dev": "cd email-worker && wrangler dev",
+    "deploy:email": "cd email-worker && wrangler deploy"
   },
   "dependencies": {
     "react": "^18.2.0",
