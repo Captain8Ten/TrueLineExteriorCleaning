@@ -71,7 +71,7 @@ The site sends quote requests through a **Cloudflare Pages Function** at `/api/c
    - **Variable name:** `NOTIFY` (must match the code; case-sensitive).  
    - Prefer an unrestricted binding, or set the destination to match `CONTACT_TO` / your verified address.  
 5. Connect the Git repo to **Cloudflare Pages** (or deploy with Wrangler). Build command: `npm run build`, output directory: **`dist`**. The `functions/` folder is deployed as Pages Functions automatically.  
-   If the build complains about the Wrangler project name, set `name` in `wrangler.toml` to match your **Pages project name** exactly (see **Workers & Pages** in the dashboard).
+   The `name` field in `wrangler.toml` must be **lowercase letters, numbers, and dashes only** (e.g. `trueline-exterior-cleaning`). It should match your **Pages project** slug; if the dashboard name uses spaces or capitals, Cloudflare usually uses a slug like this for config.
 
 **Docs:** [Send emails from Workers](https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/)
 

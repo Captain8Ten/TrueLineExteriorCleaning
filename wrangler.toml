@@ -3,7 +3,8 @@
 #
 # Optional: set the same vars in Pages → Settings → Environment variables (production / preview).
 
-name = "TrueLineExteriorCleaning"
+# Must be lowercase, alphanumeric, dashes only (Pages / Wrangler validation).
+name = "trueline-exterior-cleaning"
 compatibility_date = "2025-03-01"
 pages_build_output_dir = "dist"
 
