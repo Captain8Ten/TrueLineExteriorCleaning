@@ -1,6 +1,11 @@
-# Cloudflare Pages (static site + React). Email is handled by ../email-worker (separate Worker).
-# Pages CI does not support [[send_email]] here.
+# Cloudflare Pages (static site + React).
+# /api/contact is a Pages Function that proxies to the email Worker (send_email lives there only).
+# Deploy email-worker first, then set EMAIL_WORKER_URL to its *.workers.dev URL.
 
 name = "trueline-exterior-cleaning"
 compatibility_date = "2025-03-01"
 pages_build_output_dir = "dist"
+
+[vars]
+# Required after: npm run deploy:email — paste the workers.dev URL here or in Pages → Settings → Variables.
+EMAIL_WORKER_URL = ""

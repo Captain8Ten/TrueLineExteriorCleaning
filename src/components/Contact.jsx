@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Contact.css'
 
-// Same-origin /api/contact after you attach the email Worker to that path (recommended).
-// Or set VITE_CONTACT_API_URL to your *.workers.dev URL from `npm run deploy:email`.
+// Default: POST /api/contact → Pages Function → email Worker (set EMAIL_WORKER_URL on Pages).
+// Or set VITE_CONTACT_API_URL to call the Worker *.workers.dev URL directly.
 const CONTACT_API = import.meta.env.VITE_CONTACT_API_URL?.trim() || '/api/contact'
 
 const Contact = () => {

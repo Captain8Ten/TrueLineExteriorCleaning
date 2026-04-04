@@ -56,15 +56,18 @@ To preview the production build:
 npm run preview
 ```
 
-### Contact form email (separate Worker — required)
+### Contact form email (Worker + Pages proxy)
 
-Cloudflare **Pages** builds reject `[[send_email]]` in `wrangler.toml`, and the **Send Email** binding often does **not** appear on Pages Functions (`env.NOTIFY` stays `undefined`).  
+Cloudflare **Pages** cannot use `[[send_email]]` in `wrangler.toml`, and the **Send Email** binding does not attach to Pages Functions reliably.
 
-Quote requests are handled by a **standalone Worker** in **`email-worker/`**, where **`send_email` works** in `wrangler.toml`.
+**How it works now**
+
+1. **`email-worker/`** — A **standalone Worker** sends mail via **`send_email`** / `NOTIFY` in its own `wrangler.toml`.  
+2. **`functions/api/contact.js`** — A **Pages Function** that exports **`onRequestPost`** and **`onRequestOptions`**. It **proxies** the browser request to the Worker URL (`EMAIL_WORKER_URL`). That fixes **405** on `POST /api/contact` and works for **apex** and **www** the same way.
 
 **1. Email Routing (zone)**  
-- **Email Routing** on `truelineexteriorcleaning.com` with **`tlink1776@gmail.com`** verified as a **destination**.  
-- **From** address for sends: **`contact@truelineexteriorcleaning.com`** (edit `email-worker/wrangler.toml` `[vars]` if you change addresses).
+- **`tlink1776@gmail.com`** verified as a **destination** in Email Routing.  
+- **`contact@truelineexteriorcleaning.com`** in `email-worker/wrangler.toml` as **`CONTACT_FROM`**.
 
 **2. Deploy the mail Worker**
 
@@ -72,23 +75,25 @@ Quote requests are handled by a **standalone Worker** in **`email-worker/`**, wh
 npm run deploy:email
 ```
 
-Note the **`*.workers.dev`** URL Wrangler prints (e.g. `https://trueline-contact-email.<account>.workers.dev`).
+Copy the **`https://trueline-contact-email.<subdomain>.workers.dev`** URL from the output.
 
-**3. Connect the website to the Worker — pick one**
+**3. Point Pages at that Worker (required)**
 
-- **Option A — Custom route (recommended, no rebuild):**  
-  **Workers & Pages** → **trueline-contact-email** → **Settings** → **Triggers** → **Routes** → **Add route**  
-  - Route: `www.truelineexteriorcleaning.com/api/contact` (or `*truelineexteriorcleaning.com/api/contact*` per Cloudflare’s pattern help).  
-  The React app already POSTs to **`/api/contact`** on the same host, so no env var is needed.
+Set **`EMAIL_WORKER_URL`** to that URL (no trailing slash):
 
-- **Option B — workers.dev URL:**  
-  In **Cloudflare Pages** → your site → **Settings** → **Environment variables** → **Build** (or **Production** if you inject at build time), set  
-  `VITE_CONTACT_API_URL` = your Worker’s `https://....workers.dev` URL  
-  Redeploy the **Pages** project so Vite bakes it in.
+- In **`wrangler.toml`** under **`[vars]`** (then commit), **or**  
+- **Cloudflare Pages** → your project → **Settings** → **Environment variables** → **Production** (and **Preview** if you use it).
 
-**4. CORS** — `email-worker/wrangler.toml` lists **`ALLOWED_ORIGIN`** for `www` and apex. Adjust if your live URL differs.
+Redeploy **Pages** after changing vars.
 
-**5. Local dev** — Terminal A: `npm run dev`. Terminal B: `npm run email:dev` (Worker on port **8787**). Vite proxies `/api/contact` → the Worker.
+**4. Remove duplicate routes (if any)**  
+If you added a **Worker route** on the zone for `/api/contact`, remove it so **only** the Pages app handles `/api/contact` and proxies to `EMAIL_WORKER_URL`. Otherwise two handlers can conflict.
+
+**5. CORS** — `email-worker/wrangler.toml` **`ALLOWED_ORIGIN`** includes apex + `www`. The proxy forwards the browser **`Origin`** header to the Worker.
+
+**6. Local dev** — Terminal A: `npm run dev` (Vite proxies `/api/contact` → port **8787**). Terminal B: `npm run email:dev`. For the proxy path, set **`EMAIL_WORKER_URL`** in **`wrangler.toml`** to your **deployed** `workers.dev` URL, then run **`npm run pages:dev`** to test the full proxy locally.
+
+**Optional:** Set **`VITE_CONTACT_API_URL`** only if the form should call the Worker **directly** (skip proxy). Default is same-origin **`/api/contact`**.
 
 **Docs:** [Send emails from Workers](https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/)
 
@@ -96,7 +101,9 @@ Note the **`*.workers.dev`** URL Wrangler prints (e.g. `https://trueline-contact
 
 ```
 TrueLine/
-├── email-worker/          # Cloudflare Worker: contact form → Email Routing (NOTIFY)
+├── email-worker/          # Worker: send_email (NOTIFY)
+├── functions/api/
+│   └── contact.js         # Pages Function: proxy POST → EMAIL_WORKER_URL
 ├── public/
 │   └── TrueLineExteriorCleaningLogo.png
 ├── src/
