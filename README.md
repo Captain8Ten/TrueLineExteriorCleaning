@@ -66,8 +66,8 @@ Cloudflare **Pages** cannot use `[[send_email]]` in `wrangler.toml`, and the **S
 2. **`functions/api/contact.js`** — A **Pages Function** that exports **`onRequestPost`** and **`onRequestOptions`**. It **proxies** the browser request to the Worker URL (`EMAIL_WORKER_URL`). That fixes **405** on `POST /api/contact` and works for **apex** and **www** the same way.
 
 **1. Email Routing (zone)**  
-- **`tlink1776@gmail.com`** verified as a **destination** in Email Routing.  
-- **`contact@truelineexteriorcleaning.com`** in `email-worker/wrangler.toml` as **`CONTACT_FROM`**.
+- **`info@truelineexteriorcleaning.com`** verified as a **destination** in Email Routing (Worker **`CONTACT_TO`** — where contact-form messages are delivered).  
+- **`contact@truelineexteriorcleaning.com`** in `email-worker/wrangler.toml` as **`CONTACT_FROM`** (the address the Worker sends as).
 
 **2. Deploy the mail Worker**
 
