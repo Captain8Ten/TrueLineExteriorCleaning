@@ -14,7 +14,7 @@ name = "NOTIFY"
 
 [vars]
 CONTACT_FROM = "contact@truelineexteriorcleaning.com"
-CONTACT_TO = "tlink1776@gmail.com"
+CONTACT_TO = "info@truelineexteriorcleaning.com"
 # Comma-separated allowed Origins for CORS (required if browser calls workers.dev URL).
 # Example: https://www.truelineexteriorcleaning.com,https://truelineexteriorcleaning.com
 ALLOWED_ORIGIN = "https://www.truelineexteriorcleaning.com,https://truelineexteriorcleaning.com"
