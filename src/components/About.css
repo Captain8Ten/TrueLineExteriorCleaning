@@ -1,0 +1,147 @@
+.about {
+  padding: 6rem 2rem;
+  background: var(--white);
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 4rem;
+  row-gap: 2rem;
+  align-items: start;
+}
+
+/* Title only in column 1, row 1 — panel sits in row 2 so its top lines up with body copy */
+.about-heading {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: left;
+  margin: 0 0 0.25rem;
+}
+
+.about-heading.section-title::after {
+  left: 0;
+  transform: none;
+}
+
+.about-body {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--dark-silver);
+  margin-bottom: 1.5rem;
+}
+
+.about-description:last-child {
+  margin-bottom: 0;
+}
+
+.about-image {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+  align-self: start;
+}
+
+.about-highlight-panel {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 102, 204, 0.3);
+  padding: 2rem 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.about-highlight-tagline {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.about-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  margin: 0;
+  padding: 0;
+}
+
+.about-feature {
+  display: grid;
+  grid-template-columns: 1.35rem 1fr;
+  column-gap: 0.65rem;
+  align-items: start;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.feature-check {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.12em;
+}
+
+@media (max-width: 968px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    row-gap: 1.75rem;
+  }
+
+  .about-heading {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+  }
+
+  .about-heading.section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .about-body {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .about-image {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 4rem 1rem;
+  }
+
+  .about-highlight-panel {
+    padding: 1.65rem 1.35rem 1.85rem;
+  }
+
+  .about-feature {
+    font-size: 0.95rem;
+  }
+}
