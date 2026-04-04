@@ -1,20 +1,11 @@
-# Cloudflare Pages + Email Routing (send_email).
-# Docs: https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/
+# Cloudflare Pages — keep this file minimal. Pages CI does NOT allow [[send_email]] here.
+# Add the Send Email binding in the dashboard (steps in README).
 #
-# Before deploy:
-# 1. Add your domain to Cloudflare and enable Email Routing.
-# 2. Verify CONTACT_TO (your real inbox) as a routing destination in the dashboard.
-# 3. Set CONTACT_FROM to an address on that same domain (create a routing address or use a custom from).
-# 4. Replace placeholders below OR override vars in Pages → Settings → Environment variables.
-# 5. Production: set ALLOWED_ORIGIN to your live site URL (e.g. https://www.example.com) to block random origins.
+# Optional: set the same vars in Pages → Settings → Environment variables (production / preview).
 
-name = "trueline-exterior-cleaning"
+name = "TrueLineExteriorCleaning"
 compatibility_date = "2025-03-01"
 pages_build_output_dir = "dist"
-
-# Unrestricted binding: recipient comes from CONTACT_TO (must be a verified Email Routing destination).
-[[send_email]]
-name = "NOTIFY"
 
 [vars]
 CONTACT_FROM = "quotes@YOURDOMAIN.com"

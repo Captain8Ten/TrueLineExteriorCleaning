@@ -1,7 +1,7 @@
 /**
  * Contact form → Cloudflare Email Routing (send_email binding).
- * Set CONTACT_FROM (your @custom-domain address) and CONTACT_TO (verified destination)
- * in wrangler.toml [vars] or the Pages dashboard.
+ * CONTACT_FROM / CONTACT_TO: wrangler.toml [vars] or Pages → Environment variables.
+ * NOTIFY: add a Send Email binding in the Pages dashboard (cannot be set in wrangler.toml for Pages).
  */
 
 function sanitizeLine(s, max = 2000) {
@@ -75,6 +75,16 @@ export async function onRequestPost(context) {
 
   if (!fromAddr || !toAddr) {
     return Response.json({ error: 'Server email is not configured' }, { status: 500 })
+  }
+
+  if (!env.NOTIFY) {
+    return Response.json(
+      {
+        error:
+          'Email is not wired up yet. In Cloudflare: Workers & Pages → your project → Settings → Functions → Bindings → Add → Send Email. Name the binding exactly NOTIFY (same as in code).',
+      },
+      { status: 500 }
+    )
   }
 
   const bodyText = [

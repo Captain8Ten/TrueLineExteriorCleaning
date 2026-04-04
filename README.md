@@ -60,12 +60,18 @@ npm run preview
 
 The site sends quote requests through a **Cloudflare Pages Function** at `/api/contact` using Cloudflare’s **Email Routing** “send email from Workers” feature (no third-party email API).
 
+**Important:** Cloudflare Pages **does not allow** `[[send_email]]` inside `wrangler.toml` during the build (you will see a validation error). The **Send Email** binding must be added in the **dashboard** after the project exists.
+
 **One-time setup**
 
-1. Put your domain on Cloudflare and turn on **Email Routing**. Add and verify the inbox where you want leads (this becomes `CONTACT_TO`).
-2. Use a **From** address on that same domain (e.g. `quotes@yourdomain.com`). Create it under Email Routing if needed. Set it as `CONTACT_FROM` in `wrangler.toml` `[vars]` or in **Pages → Settings → Environment variables** (production).
-3. Edit `wrangler.toml` placeholders: `CONTACT_FROM`, `CONTACT_TO`. Optionally set `ALLOWED_ORIGIN` to your live site URL (e.g. `https://www.yourdomain.com`) so only your site can POST to the API.
-4. Deploy with Wrangler or connect the Git repo to **Cloudflare Pages**. Use build command `npm run build` and output directory `dist`. Wrangler will pick up `functions/` and `wrangler.toml`.
+1. Put your domain on Cloudflare and turn on **Email Routing**. Add and verify the inbox where you want leads (must match `CONTACT_TO`, e.g. your Gmail as a verified destination).
+2. Use a **From** address on that same domain (e.g. `quotes@yourdomain.com`). Set **`CONTACT_FROM`** in `wrangler.toml` `[vars]` and/or **Pages → Settings → Environment variables** (Production and Preview).
+3. Set **`CONTACT_TO`** the same way (inbox that should receive the form emails). Optionally set **`ALLOWED_ORIGIN`** to your live site URL (e.g. `https://www.yourdomain.com`) so only your site can POST to the API.
+4. **Add the email binding (required):** **Workers & Pages** → your **Pages** project → **Settings** → **Functions** → **Bindings** → **Add** → **Send Email** (or **Email Routing**).  
+   - **Variable name:** `NOTIFY` (must match the code; case-sensitive).  
+   - Prefer an unrestricted binding, or set the destination to match `CONTACT_TO` / your verified address.  
+5. Connect the Git repo to **Cloudflare Pages** (or deploy with Wrangler). Build command: `npm run build`, output directory: **`dist`**. The `functions/` folder is deployed as Pages Functions automatically.  
+   If the build complains about the Wrangler project name, set `name` in `wrangler.toml` to match your **Pages project name** exactly (see **Workers & Pages** in the dashboard).
 
 **Docs:** [Send emails from Workers](https://developers.cloudflare.com/email-routing/email-workers/send-email-workers/)
 
