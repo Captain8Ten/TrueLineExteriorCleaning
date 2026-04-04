@@ -4,7 +4,7 @@ import './Services.css'
 const Services = () => {
   const services = [
     {
-      icon: '🚗',
+      icon: '🛣️',
       title: 'Driveways',
       description:
         'Oil spots, tire marks, that dull gray look—I get it. I\'ll hit the concrete or asphalt and bring it back so you\'re loving your driveway again.',
@@ -13,10 +13,10 @@ const Services = () => {
     },
     {
       icon: '🪵',
-      title: 'Decks & Patios',
+      title: 'Decks, Patios, & Fences',
       description:
         'Wood gone gray, composite slick with gunk, or pavers fuzzy with mildew—I\'ll have your deck or patio looking brand new.',
-      pricingLines: ['Small patio: $150', 'Medium deck: $200', 'Large / detailed: $300+'],
+      pricingLines: ['Small: $150', 'Medium: $200', 'Large / detailed: $300+'],
       features: ['Wood, composite, pavers', 'Steps & railings', 'Happy to talk stain or seal after']
     },
     {
@@ -51,7 +51,9 @@ const Services = () => {
         <div className="services-grid">
           {services.map((service, index) => (
             <div key={index} className="service-card">
-              <div className="service-icon">{service.icon}</div>
+              <span className="service-icon" aria-hidden="true">
+                {service.icon}
+              </span>
               <h3 className="service-title">{service.title}</h3>
               <p className="service-description">{service.description}</p>
               <div className="service-pricing" aria-label="Starting prices">

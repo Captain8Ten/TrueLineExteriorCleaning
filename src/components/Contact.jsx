@@ -6,6 +6,13 @@ import {
   BUSINESS_PHONE_TEL,
   formatPhoneInput
 } from '../constants/contactInfo'
+import {
+  IconBriefcase,
+  IconClock,
+  IconEnvelope,
+  IconMapPin,
+  IconPhone
+} from './icons/ThemeIcons'
 import './Contact.css'
 
 // Default: POST /api/contact → Pages Function → email Worker (set EMAIL_WORKER_URL on Pages).
@@ -105,7 +112,9 @@ const Contact = () => {
           <div className="contact-info">
             <h3>Contact Information</h3>
             <div className="info-item">
-              <span className="info-icon">📞</span>
+              <span className="info-icon" aria-hidden="true">
+                <IconPhone />
+              </span>
               <div>
                 <strong>Phone</strong>
                 <p>
@@ -114,7 +123,9 @@ const Contact = () => {
               </div>
             </div>
             <div className="info-item">
-              <span className="info-icon">✉️</span>
+              <span className="info-icon" aria-hidden="true">
+                <IconEnvelope />
+              </span>
               <div>
                 <strong>Email</strong>
                 <p>
@@ -123,18 +134,32 @@ const Contact = () => {
               </div>
             </div>
             <div className="info-item">
-              <span className="info-icon">📍</span>
+              <span className="info-icon" aria-hidden="true">
+                <IconMapPin />
+              </span>
               <div>
                 <strong>Service Area</strong>
                 <p>Auburn Hills & Surrounding Areas</p>
               </div>
             </div>
             <div className="info-item">
-              <span className="info-icon">🕒</span>
+              <span className="info-icon" aria-hidden="true">
+                <IconClock />
+              </span>
               <div>
                 <strong>Business Contact Hours</strong>
-                <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
-                <p>Sunday: Closed</p>
+                <p>Every day: 8:00 AM – 9:00 PM</p>
+              </div>
+            </div>
+            <div className="info-item">
+              <span className="info-icon" aria-hidden="true">
+                <IconBriefcase />
+              </span>
+              <div>
+                <strong>Business working hours</strong>
+                <p className="contact-working-hours-text">
+                  Afternoon through evening and weekend work available, weather permitting.
+                </p>
               </div>
             </div>
             <p className="contact-response">
