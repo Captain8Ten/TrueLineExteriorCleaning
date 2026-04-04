@@ -5,21 +5,8 @@
 name = "trueline-exterior-cleaning"
 compatibility_date = "2025-03-01"
 pages_build_output_dir = "dist"
-
-[observability]
-enabled = false
-head_sampling_rate = 1
-
-[observability.logs]
-enabled = true
-head_sampling_rate = 1
-persist = true
-invocation_logs = true
-
-[observability.traces]
-enabled = false
-persist = true
-head_sampling_rate = 1
+# Observability ([observability]) is not supported in Pages wrangler.toml — configure it on the
+# standalone Worker in email-worker/wrangler.toml and deploy with: npm run deploy:email
 
 [vars]
 # Required after: npm run deploy:email — paste the workers.dev URL here or in Pages → Settings → Variables.
