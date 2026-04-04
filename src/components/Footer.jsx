@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { BUSINESS_EMAIL, BUSINESS_PHONE_DISPLAY, BUSINESS_PHONE_TEL } from '../constants/contactInfo'
 import './Footer.css'
 
 const Footer = () => {
@@ -81,10 +82,10 @@ const Footer = () => {
             <h3 className="footer-heading">Contact</h3>
             <ul className="footer-contact">
               <li>
-                <a href="tel:+15551234567">(555) 123-4567</a>
+                <a href={`tel:${BUSINESS_PHONE_TEL}`}>{BUSINESS_PHONE_DISPLAY}</a>
               </li>
               <li>
-                <a href="mailto:info@truelinecleaning.com">info@truelinecleaning.com</a>
+                <a href={`mailto:${BUSINESS_EMAIL}`}>{BUSINESS_EMAIL}</a>
               </li>
               <li>
                 <span className="footer-contact-label">Service area</span>

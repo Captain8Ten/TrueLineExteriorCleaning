@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_PHONE_TEL,
+  formatPhoneInput
+} from '../constants/contactInfo'
 import './Contact.css'
 
 // Default: POST /api/contact → Pages Function → email Worker (set EMAIL_WORKER_URL on Pages).
@@ -23,6 +29,13 @@ const Contact = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handlePhoneChange = (e) => {
+    setFormData({
+      ...formData,
+      phone: formatPhoneInput(e.target.value)
     })
   }
 
@@ -95,14 +108,18 @@ const Contact = () => {
               <span className="info-icon">📞</span>
               <div>
                 <strong>Phone</strong>
-                <p>(555) 123-4567</p>
+                <p>
+                  <a href={`tel:${BUSINESS_PHONE_TEL}`}>{BUSINESS_PHONE_DISPLAY}</a>
+                </p>
               </div>
             </div>
             <div className="info-item">
               <span className="info-icon">✉️</span>
               <div>
                 <strong>Email</strong>
-                <p>info@truelinecleaning.com</p>
+                <p>
+                  <a href={`mailto:${BUSINESS_EMAIL}`}>{BUSINESS_EMAIL}</a>
+                </p>
               </div>
             </div>
             <div className="info-item">
@@ -156,12 +173,19 @@ const Contact = () => {
               <label htmlFor="phone">Phone Number</label>
               <input
                 type="tel"
+                inputMode="numeric"
+                autoComplete="tel-national"
                 id="phone"
                 name="phone"
                 value={formData.phone}
-                onChange={handleChange}
-                placeholder="(555) 123-4567"
+                onChange={handlePhoneChange}
+                placeholder={BUSINESS_PHONE_DISPLAY}
+                maxLength={12}
+                aria-describedby="phone-hint"
               />
+              <span id="phone-hint" className="field-hint">
+                Numbers only — dashes are added automatically.
+              </span>
             </div>
 
             <div className="form-group">

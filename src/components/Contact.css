@@ -60,6 +60,22 @@
   line-height: 1.6;
 }
 
+.info-item p a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.info-item p a:hover {
+  text-decoration: underline;
+}
+
+.field-hint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--dark-silver);
+}
+
 .contact-response {
   margin: 0;
   padding-top: 1.5rem;

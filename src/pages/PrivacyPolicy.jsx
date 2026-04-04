@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { BUSINESS_EMAIL, BUSINESS_PHONE_DISPLAY, BUSINESS_PHONE_TEL } from '../constants/contactInfo'
 import './PrivacyPolicy.css'
 
 const PrivacyPolicy = () => {
@@ -102,8 +103,8 @@ const PrivacyPolicy = () => {
           <h2>Contact us</h2>
           <p>
             For questions about this policy or your information, contact us at{' '}
-            <a href="mailto:info@truelinecleaning.com">info@truelinecleaning.com</a> or call{' '}
-            <a href="tel:+15551234567">(555) 123-4567</a>.
+            <a href={`mailto:${BUSINESS_EMAIL}`}>{BUSINESS_EMAIL}</a> or call{' '}
+            <a href={`tel:${BUSINESS_PHONE_TEL}`}>{BUSINESS_PHONE_DISPLAY}</a>.
           </p>
         </div>
       </main>
