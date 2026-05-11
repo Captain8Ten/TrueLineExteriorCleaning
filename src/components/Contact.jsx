@@ -231,12 +231,10 @@ const Contact = () => {
                   <option value="Walkways & Sidewalks">Walkways & Sidewalks</option>
                   <option value="Other">Other</option>
                 </optgroup>
-                <optgroup label="Bundles (save on your total project)">
-                  <option value="Driveway + Siding">Driveway + Siding</option>
-                  <option value="Driveway + Walkways &amp; Sidewalks">Driveway + Walkways &amp; Sidewalks</option>
-                  <option value="Decks/Patios + Siding">Decks/Patios + Siding</option>
-                  <option value="Driveway + Decks/Patios">Driveway + Decks/Patios</option>
-                  <option value="Custom bundle">Custom bundle (describe below)</option>
+                <optgroup label="Multiple areas">
+                  <option value="Custom or bundle">
+                    Custom or bundle — describe each area below
+                  </option>
                 </optgroup>
               </select>
             </div>
@@ -249,7 +247,7 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 rows="5"
-                placeholder="Tell us about your project..."
+                placeholder="For a bundle, list each surface you want (e.g. driveway + walkways). Otherwise describe your project..."
               ></textarea>
             </div>
 

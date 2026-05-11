@@ -81,7 +81,7 @@ const Footer = () => {
               <li>Fences</li>
               <li>Siding</li>
               <li>Walkways &amp; sidewalks</li>
-              <li>Bundles (combine multiple services)</li>
+              <li>Custom or bundle</li>
             </ul>
           </div>
 
