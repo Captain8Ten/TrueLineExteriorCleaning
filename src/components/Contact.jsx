@@ -148,7 +148,7 @@ const Contact = () => {
               </span>
               <div>
                 <strong>Business Contact Hours</strong>
-                <p>Every day: 8:00 AM – 9:00 PM</p>
+                <p>Every day: 8:00 AM – 8:00 PM</p>
               </div>
             </div>
             <div className="info-item">
@@ -224,7 +224,9 @@ const Contact = () => {
                 <option value="">Select a service</option>
                 <optgroup label="Individual services">
                   <option value="Driveways">Driveways</option>
+                  <option value="Roofs">Roofs</option>
                   <option value="Decks & Patios">Decks & Patios</option>
+                  <option value="Fences">Fences</option>
                   <option value="Siding">Siding</option>
                   <option value="Walkways & Sidewalks">Walkways & Sidewalks</option>
                   <option value="Other">Other</option>

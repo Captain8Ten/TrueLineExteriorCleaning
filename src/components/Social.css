@@ -1,0 +1,133 @@
+.social {
+  padding: 6rem 2rem;
+  background: linear-gradient(to bottom, var(--light-gray), var(--white));
+}
+
+.social-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-header.social-header {
+  margin-bottom: 2.5rem;
+}
+
+.social-subtitle {
+  max-width: 520px;
+}
+
+.social-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: var(--gray);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.social-card:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 3px;
+}
+
+.social-card--facebook:hover {
+  border-color: rgba(24, 119, 242, 0.45);
+}
+
+.social-card--instagram:hover {
+  border-color: rgba(225, 48, 108, 0.4);
+}
+
+.social-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 12px;
+  margin-bottom: 0.25rem;
+}
+
+.social-card-icon-svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.social-card--facebook .social-card-icon {
+  background: rgba(24, 119, 242, 0.12);
+  color: #1877f2;
+}
+
+.social-card--instagram .social-card-icon {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 96, 64, 0.15) 0%,
+    rgba(225, 48, 108, 0.15) 50%,
+    rgba(131, 58, 180, 0.15) 100%
+  );
+  color: #e1306c;
+}
+
+.social-card-label {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gray);
+}
+
+.social-card-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--dark-silver);
+  flex: 1;
+}
+
+.social-card-cta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-top: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.social-card-cta-arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.social-card:hover .social-card-cta {
+  color: var(--dark-blue);
+}
+
+@media (max-width: 768px) {
+  .social {
+    padding: 4rem 1rem;
+  }
+}

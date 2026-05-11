@@ -60,6 +60,9 @@ const Header = () => {
           <Link to={{ pathname: '/', hash: '#about' }} onClick={handleSectionNav('about')}>
             About
           </Link>
+          <Link to={{ pathname: '/', hash: '#follow' }} onClick={handleSectionNav('follow')}>
+            Follow us
+          </Link>
           <Link to={{ pathname: '/', hash: '#contact' }} onClick={handleSectionNav('contact')}>
             Contact
           </Link>

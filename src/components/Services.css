@@ -54,9 +54,9 @@
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1000px) {
   .services-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -78,7 +78,16 @@
 .service-icon {
   font-size: 3rem;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+}
+
+.service-icon-svg {
+  width: 3rem;
+  height: 3rem;
   display: block;
+  flex-shrink: 0;
 }
 
 .service-title {
@@ -95,63 +104,22 @@
   font-size: 0.98rem;
 }
 
-.service-pricing {
-  margin-bottom: 1.25rem;
+.service-features {
+  list-style: none;
   padding: 0.85rem 1rem;
+  margin: 0;
   background: rgba(0, 102, 204, 0.06);
   border-radius: 10px;
   border-left: 3px solid var(--primary-blue);
 }
 
-.service-pricing-label {
-  margin: 0 0 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--gray);
-}
-
-.service-pricing-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.service-pricing-line {
-  margin: 0;
-  padding: 0.25rem 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--gray);
-  line-height: 1.45;
-  padding-left: 0.65rem;
-  border-left: 2px solid rgba(0, 102, 204, 0.35);
-}
-
-.service-pricing-line + .service-pricing-line {
-  margin-top: 0.2rem;
-}
-
-.service-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .service-features li {
-  padding: 0.5rem 0;
+  margin: 0;
+  padding: 0.35rem 0;
   color: var(--gray);
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.service-features li::before {
-  content: '•';
-  position: absolute;
-  left: 0;
-  color: var(--primary-blue);
-  font-weight: bold;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .services-bundle {

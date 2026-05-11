@@ -4,6 +4,10 @@ export const BUSINESS_PHONE_DISPLAY = '810-429-8752'
 export const BUSINESS_PHONE_TEL = '+18104298752'
 export const BUSINESS_EMAIL = 'contact@truelineexteriorcleaning.com'
 
+/** Public profile URLs — update if your handles differ. */
+export const SOCIAL_FACEBOOK_URL = 'https://www.facebook.com/truelineexteriorcleaning'
+export const SOCIAL_INSTAGRAM_URL = 'https://www.instagram.com/truelineexteriorcleaning/'
+
 /** Max 10 digits; formats as XXX-XXX-XXXX as the user types. */
 export function formatPhoneInput(value) {
   const d = String(value).replace(/\D/g, '').slice(0, 10)

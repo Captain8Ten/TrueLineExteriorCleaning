@@ -60,6 +60,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
+                <a href="/#follow" onClick={goToSection('follow')}>
+                  Follow us
+                </a>
+              </li>
+              <li>
                 <a href="/#contact" onClick={goToSection('contact')}>
                   Contact &amp; quotes
                 </a>
@@ -71,7 +76,9 @@ const Footer = () => {
             <h3 className="footer-heading">Services</h3>
             <ul className="footer-links">
               <li>Driveways</li>
+              <li>Roofs</li>
               <li>Decks &amp; patios</li>
+              <li>Fences</li>
               <li>Siding</li>
               <li>Walkways &amp; sidewalks</li>
               <li>Bundles (combine multiple services)</li>
