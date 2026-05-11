@@ -68,17 +68,6 @@ const SERVICES = [
       description:
         'Front walk, side path, that strip of sidewalk everyone sees first—same honest cleanup as the driveway, just scoped to foot traffic and smaller slabs.',
       features: ['Paths & entry walks', 'Steps & landings']
-    },
-    {
-      icon: '📦',
-      title: 'Custom or bundle',
-      description:
-        'Mixing a driveway with walks, siding with a deck, or several spots in one visit? Tell me what you want combined and I\'ll scope it as one job with one straight quote.',
-      features: [
-        'Combine any of the services above',
-        'Spell out each area in your message (or on the contact form)',
-        'Single visit and one quote when it makes sense'
-      ]
     }
 ]
 
@@ -89,9 +78,9 @@ const Services = () => {
         <div className="section-header">
           <h2 className="section-title">Exterior Cleaning Services</h2>
           <p className="section-subtitle">
-            I&apos;m a small shop—pick a single service or use{' '}
-            <strong>Custom or bundle</strong> when you want several areas done together. Every job
-            gets a clear quote; if something&apos;s not a fit, I&apos;ll say so.
+            I&apos;m a small shop—I focus on these jobs and do them right. Every job gets a clear
+            quote for your property. Need more than one area? Mention it when you reach out—I&apos;ll
+            roll it into one plan if it makes sense. If something&apos;s not a fit, I&apos;ll say so.
           </p>
         </div>
 
